@@ -1,0 +1,257 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>Felicitación</title>
+
+<style>
+
+body{
+margin:0;
+overflow:hidden;
+background:black;
+font-family:sans-serif;
+}
+
+.escena{
+position:relative;
+width:100vw;
+height:100vh;
+overflow:hidden;
+}
+
+/* IMAGENES */
+
+.fondo{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+transition:transform 4s ease, opacity 2s ease;
+transform-origin:50% 20%;
+}
+
+#abiertas{
+opacity:0;
+}
+
+#interior{
+opacity:0;
+}
+
+#sobre{
+opacity:0;
+}
+
+#sobre2{
+opacity:0;
+}
+
+#carta{
+opacity:0;
+}
+
+#carta2{
+opacity:0;
+}
+
+/* ZOOM */
+
+.zoom{
+transform:scale(3.5);
+}
+
+/* zoom interior derecha abajo */
+
+.zoom-interior{
+transform:scale(1.8) translate(-10%, -10%);
+}
+
+/* BOTONES */
+
+button{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+padding:30px 70px;
+font-size:40px;
+border:none;
+border-radius:15px;
+background:#ff4d6d;
+color:white;
+cursor:pointer;
+box-shadow:0 0 30px rgba(0,0,0,0.5);
+transition:opacity 0.6s, transform 0.3s;
+}
+
+button:hover{
+transform:translate(-50%,-50%) scale(1.1);
+}
+
+#boton-mirar,
+#boton-leer{
+opacity:0;
+pointer-events:none;
+}
+
+/* TRANSICIONES */
+
+#negro{
+position:absolute;
+width:100%;
+height:100%;
+background:black;
+opacity:0;
+transition:opacity 1.5s;
+}
+
+#brillo{
+position:absolute;
+width:100%;
+height:100%;
+background:white;
+opacity:0;
+transition:opacity 1s;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="escena">
+
+<img src="puertas-cerradas.png" id="cerradas" class="fondo">
+<img src="puertas-abiertas.png" id="abiertas" class="fondo">
+<img src="interior.png" id="interior" class="fondo">
+
+<img src="sobre.png" id="sobre" class="fondo">
+<img src="sobre2.png" id="sobre2" class="fondo">
+
+<img src="carta.png" id="carta" class="fondo">
+<img src="carta2.png" id="carta2" class="fondo">
+
+<div id="negro"></div>
+<div id="brillo"></div>
+
+<button id="boton-regalo" onclick="abrirRegalo()">
+🎁 Abre tu regalo
+</button>
+
+<button id="boton-mirar" onclick="mirarSobre()">
+✉️ Mirar
+</button>
+
+<button id="boton-leer" onclick="leerCarta()">
+📜 Leer
+</button>
+
+<audio id="musica">
+<source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
+<script>
+
+function abrirRegalo(){
+
+document.getElementById("musica").play()
+
+document.getElementById("cerradas").style.opacity="0"
+
+let abiertas=document.getElementById("abiertas")
+abiertas.style.opacity="1"
+abiertas.classList.add("zoom")
+
+document.getElementById("boton-regalo").style.opacity="0"
+
+setTimeout(function(){
+document.getElementById("negro").style.opacity="1"
+},3500)
+
+setTimeout(function(){
+document.getElementById("brillo").style.opacity="1"
+},5000)
+
+setTimeout(function(){
+
+document.getElementById("brillo").style.opacity="0"
+document.getElementById("negro").style.opacity="0"
+
+document.getElementById("interior").style.opacity="1"
+
+},6000)
+
+setTimeout(function(){
+
+let mirar=document.getElementById("boton-mirar")
+
+mirar.style.opacity="1"
+mirar.style.pointerEvents="auto"
+
+},8500)
+
+}
+
+/* MIRAR SOBRE */
+
+function mirarSobre(){
+
+document.getElementById("boton-mirar").style.opacity="0"
+
+let interior=document.getElementById("interior")
+
+interior.classList.add("zoom-interior")
+
+setTimeout(function(){
+
+document.getElementById("sobre").style.opacity="1"
+
+},3000)
+
+setTimeout(function(){
+
+document.getElementById("sobre").style.opacity="0"
+document.getElementById("sobre2").style.opacity="1"
+
+},7000)
+
+setTimeout(function(){
+
+let leer=document.getElementById("boton-leer")
+
+leer.style.opacity="1"
+leer.style.pointerEvents="auto"
+
+},6500)
+
+}
+
+/* LEER CARTA */
+
+function leerCarta(){
+
+document.getElementById("boton-leer").style.opacity="0"
+
+document.getElementById("sobre2").style.opacity="0"
+
+document.getElementById("carta").style.opacity="1"
+
+setTimeout(function(){
+
+document.getElementById("carta").style.opacity="0"
+document.getElementById("carta2").style.opacity="1"
+
+},4000)
+
+}
+
+</script>
+
+</body>
+</html>
+```
